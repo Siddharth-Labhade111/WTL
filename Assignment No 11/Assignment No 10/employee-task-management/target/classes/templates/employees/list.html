@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="page narrow">
+    <div class="section-heading">
+        <div>
+            <h1>Employees</h1>
+            <p class="subtitle">Employee Directory</p>
+        </div>
+        <div class="actions">
+            <a class="button secondary" th:href="@{/}">Dashboard</a>
+            <a class="button" th:href="@{/employees/new}">Add Employee</a>
+        </div>
+    </div>
+
+    <section class="table-card">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Assigned Tasks</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.name}">Employee Name</td>
+                <td th:text="${employee.designation}">Designation</td>
+                <td th:text="${employee.email}">Email</td>
+                <td th:text="${employee.phoneNumber}">Phone</td>
+                <td th:text="${employee.tasks.size()}">0</td>
+                <td><a th:href="@{/employees/{id}(id=${employee.id})}">View</a></td>
+            </tr>
+            <tr th:if="${employees.isEmpty()}">
+                <td colspan="6">No employees added yet.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

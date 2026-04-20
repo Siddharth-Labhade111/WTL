@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Task Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="page">
+    <div class="section-heading">
+        <div>
+            <h1>Employee Task Management System</h1>
+            <p class="subtitle">Engineering Department</p>
+        </div>
+        <div class="actions">
+            <a class="button secondary" th:href="@{/employees}">Employees</a>
+            <a class="button secondary" th:href="@{/tasks}">Tasks</a>
+            <a class="button" th:href="@{/tasks/new}">Assign Task</a>
+        </div>
+    </div>
+
+    <section class="stats-grid">
+        <article class="stat-card">
+            <span>Total Employees</span>
+            <strong th:text="${summary.employeeCount}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>Total Tasks</span>
+            <strong th:text="${summary.taskCount}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>Pending</span>
+            <strong th:text="${summary.pendingTasks}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>In Progress</span>
+            <strong th:text="${summary.inProgressTasks}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>Completed</span>
+            <strong th:text="${summary.completedTasks}">0</strong>
+        </article>
+        <article class="stat-card alert">
+            <span>Overdue</span>
+            <strong th:text="${summary.overdueTasks}">0</strong>
+        </article>
+    </section>
+
+    <section class="panel">
+        <div class="section-heading">
+            <h3>Upcoming Tasks</h3>
+            <a th:href="@{/tasks}">View All</a>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Employee</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Due Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${summary.upcomingTasks}">
+                <td th:text="${task.title}">Task</td>
+                <td th:text="${task.employee.name}">Employee</td>
+                <td th:text="${task.category}">Category</td>
+                <td><span class="pill" th:text="${task.status}">PENDING</span></td>
+                <td th:text="${task.dueDate}">2026-04-16</td>
+            </tr>
+            <tr th:if="${summary.upcomingTasks.isEmpty()}">
+                <td colspan="5">No tasks available.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

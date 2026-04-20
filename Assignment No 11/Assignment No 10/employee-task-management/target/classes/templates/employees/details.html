@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="page narrow">
+    <div class="section-heading">
+        <div>
+            <h1 th:text="${employee.name}">Employee Name</h1>
+            <p class="subtitle">Employee Details</p>
+        </div>
+        <div class="actions">
+            <a class="button secondary" th:href="@{/employees}">Back</a>
+            <a class="button" th:href="@{/tasks/new}">Assign Task</a>
+        </div>
+    </div>
+
+    <section class="stack">
+        <article class="panel">
+            <h3>Basic Information</h3>
+            <div class="detail-grid">
+                <div>
+                    <span>Designation</span>
+                    <strong th:text="${employee.designation}">Designation</strong>
+                </div>
+                <div>
+                    <span>Department</span>
+                    <strong th:text="${employee.department}">Department</strong>
+                </div>
+                <div>
+                    <span>Email</span>
+                    <strong th:text="${employee.email}">Email</strong>
+                </div>
+                <div>
+                    <span>Phone</span>
+                    <strong th:text="${employee.phoneNumber}">Phone</strong>
+                </div>
+            </div>
+        </article>
+
+        <article class="panel">
+            <div class="section-heading">
+                <h3>Assigned Tasks</h3>
+            </div>
+            <div class="list-stack" th:if="${!employee.tasks.isEmpty()}">
+                <div class="list-row" th:each="task : ${employee.tasks}">
+                    <div>
+                        <h4 th:text="${task.title}">Task</h4>
+                        <p th:text="${task.category + ' - ' + task.description}">Task details</p>
+                    </div>
+                    <div class="list-meta">
+                        <span class="pill" th:text="${task.status}">PENDING</span>
+                        <strong th:text="${task.dueDate}">2026-04-16</strong>
+                    </div>
+                </div>
+            </div>
+            <p th:if="${employee.tasks.isEmpty()}">No tasks assigned to this employee yet.</p>
+        </article>
+    </section>
+</main>
+</body>
+</html>

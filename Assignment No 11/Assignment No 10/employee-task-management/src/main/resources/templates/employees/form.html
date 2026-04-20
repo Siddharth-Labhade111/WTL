@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="page narrow">
+    <div class="section-heading">
+        <div>
+            <h1>Add Employee</h1>
+            <p class="subtitle">Enter employee details</p>
+        </div>
+        <div class="actions">
+            <a class="button secondary" th:href="@{/employees}">Back to Employees</a>
+        </div>
+    </div>
+
+    <section class="form-card">
+        <form th:action="@{/employees}" th:object="${employee}" method="post">
+            <div class="form-grid">
+                <label>
+                    Full Name
+                    <input type="text" th:field="*{name}" placeholder="Enter employee name">
+                    <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </label>
+                <label>
+                    Designation
+                    <input type="text" th:field="*{designation}" placeholder="Associate Professor">
+                    <span class="error" th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></span>
+                </label>
+                <label>
+                    Department
+                    <input type="text" th:field="*{department}" placeholder="Engineering">
+                    <span class="error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></span>
+                </label>
+                <label>
+                    Email
+                    <input type="email" th:field="*{email}" placeholder="name@college.edu">
+                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </label>
+                <label>
+                    Phone Number
+                    <input type="text" th:field="*{phoneNumber}" placeholder="10-digit number">
+                    <span class="error" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+                </label>
+            </div>
+            <button class="button" type="submit">Save Employee</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
